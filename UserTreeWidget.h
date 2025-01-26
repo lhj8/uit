@@ -8,7 +8,10 @@
 #include <QVBoxLayout>
 #include <QInputDialog>
 #include <QMessageBox>
+
+#include "AddUserDialog.h"
 #include "UserManager.h"
+#include "UserDatabase.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,9 +28,11 @@ public:
     ~UserTreeWidget();
 
     auto InitGui() -> void;
+    auto InitTreeWidgetGroups() -> void;
     auto LoadUsers() -> void;
-
-     
+    auto SetUpEvent() -> void;
+    auto GetGroup(uint8_t privilege) const -> QTreeWidgetItem*;
+    auto SaveUsersToIni() -> void;
 private:
     Ui::UserTreeWidget *ui;
     QTreeWidgetItem *supervisorGroup;

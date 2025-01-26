@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QWidget>
+#include <QMessageBox>
+
+#include "UserManager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,10 +21,14 @@ public:
     ~AddUserDialog();
 
     auto InitGui() -> void;
-
+    auto SetUpEvent() -> void;
+    auto AddUserDialog::Submit() -> void;
 
 private:
     Ui::AddUserDialog *ui;
+
+signals:
+    void userAdded();
 
 };
 
