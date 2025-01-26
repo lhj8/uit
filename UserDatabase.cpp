@@ -47,6 +47,7 @@ auto UserDatabase::Load(const QString& path) -> bool {
         for(auto i = 0; i < count; ++i) {
             auto user = std::make_shared<User>();
             const QString userI = "User" + QString::number(i);
+            qDebug() << "UserI: " << userI;
             qs.beginGroup(userI);
             user->SetUserID(ReadField(qs, Field::id).toString());
             user->SetPassword(ReadField(qs, Field::password).toString());

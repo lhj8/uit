@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTreeView" name="treeView"/>
+      <widget class="QTreeWidget" name="userTreeWidget"/>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
