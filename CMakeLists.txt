@@ -37,6 +37,9 @@ add_executable(usermanage
     UserTreeWidget.ui
     UserTreewidget.h 
     UserTreewidget.cpp
+    AddUserDialog.h
+    AddUserDialog.cpp
+    AddUserDialog.ui
 )
 
 target_link_libraries(usermanage PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui)

@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "./ui_MainWindow.h"
+#include "UserTreeWidget.h"
 
 #define SUPERVISOR 0
 #define ENGINEER 1
@@ -67,10 +68,11 @@ auto MainWindow::InitMenuBar() -> void {
 
 auto MainWindow::SetupEvents(QAction* openAction) -> void {
     connect(openAction, &QAction::triggered, this, []() {
-        
         if (SessionManager::GetInstance()->GetPrivilege() == SUPERVISOR) {
             qDebug() << "Supervisor Mode";
-            
+            UserTreeWidget *userTreeWidget = new UserTreeWidget();
+            userTreeWidget->show();
+            return;
         }
         else if (SessionManager::GetInstance()->GetPrivilege() == ENGINEER) {
             qDebug() << "Engineer Mode";
@@ -78,7 +80,7 @@ auto MainWindow::SetupEvents(QAction* openAction) -> void {
         else {
             qDebug() << "Operator Mode";
         }
-        qDebug() << "User Manage 메뉴 선택됨";
+        QMessageBox::warning(nullptr, "Acess Denied", "You don't have permission to access this feature");
     });
 }
 
