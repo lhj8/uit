@@ -1,45 +1,125 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(usermanage VERSION 0.1 LANGUAGES CXX)
-
-set(CMAKE_AUTOMOC ON)   # MOC 자동 활성화
-set(CMAKE_AUTOUIC ON)   # UI 자동 활성화
-set(CMAKE_AUTORCC ON)   # 리소스 자동 활성화
+project(UserManage VERSION 0.1 LANGUAGES CXX)
+include(GNUInstallDirs)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# file(GLOB_RECURSE SOURCES
-#     "${CMAKE_SOURCE_DIR}/*.cpp"
-#     "${CMAKE_SOURCE_DIR}/*.h"
-#     "${CMAKE_SOURCE_DIR}/*.ui"
-# )
+#Headers
+set(PRIVATE_HEADERS
+    inc/AddUserDialog.h
+    inc/loginwidget.h
+    inc/MainWindow.h
+    inc/User.h
+    inc/UserDatabase.h
+    inc/UserManager.h
+    inc/UserTreewidget.h
+    inc/SessionManager.h
+)
 
+#Sources
+set(SOURCES
+    src/AddUserDialog.cpp
+    src/loginwidget.cpp
+    src/MainWindow.cpp
+    src/User.cpp
+    src/UserDatabase.cpp
+    src/UserManager.cpp
+    src/UserTreewidget.cpp
+    src/SessionManager.cpp
+)
+
+#UI
+set(SOURCES_UI
+    ui/AddUserDialog.ui
+    ui/LogInWidget.ui
+    ui/MainWindow.ui
+    ui/UserTreeWidget.ui
+)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
-add_executable(usermanage 
-    MainWindow.ui       
-    User.h            
-    UserManager.h    
-    LogInWidget.ui  
-    SessionManager.cpp  
-    UserDatabase.cpp  
-    main.cpp
-    MainWindow.cpp  
-    SessionManager.h    
-    UserDatabase.h    
-    loginwidget.cpp        
-    MainWindow.h   
-    User.cpp            
-    UserManager.cpp   
-    loginwidget.h
-    UserTreeWidget.ui
-    UserTreewidget.h 
-    UserTreewidget.cpp
-    AddUserDialog.h
-    AddUserDialog.cpp
-    AddUserDialog.ui
+set(RESOURCE
+    ${CMAKE_SOURCE_DIR}/Resources/style/qdarkstyle/style.qrc
 )
 
-target_link_libraries(usermanage PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui)
+# To make the library
+add_library(${PROJECT_NAME} SHARED
+    ${PRIVATE_HEADERS}
+    ${SOURCES_UI}
+    ${SOURCES}
+    ${RESOURCE}
+)
+
+# To make the .exe
+# add_executable(${PROJECT_NAME}
+#     ${PRIVATE_HEADERS}
+#     ${SOURCES_UI}
+#     ${SOURCES}
+#     ${RESOURCE}
+#     main.cpp
+# )
+
+source_group("ui" FILES ${SOURCES_UI})
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+        $<INSTALL_INTERFACE:inc>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/Authority/ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/Authority/src
+)
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        AUTOMOC ON
+        AUTORCC ON
+        AUTOUIC ON
+        AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui
+)
+
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC
+        Qt5::Core
+        Qt5::Widgets
+)
+
+target_compile_features(${PROJECT_NAME} 
+    PUBLIC 
+        cxx_std_17
+)
+
+target_compile_options(${PROJECT_NAME}
+    PUBLIC
+        $<$<COMPILE_LANGUAGE:C>:/wd4251>
+        $<$<COMPILE_LANGUAGE:CXX>:/wd4251>
+)
+
+# For the shared library
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "build/libs")
+
+# For the .exe
+# set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "build/Debug")
+
+
+# 'make install' to the correct locations
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
+    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT dev
+    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT dev
+    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT application_userManage)
+install(DIRECTORY inc/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT dev)
+
+# This makes the project importable from the install directory
+# Put config file in per-project dir (name MUST match), can also
+# just go into 'cmake'.
+install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME}/cmake COMPONENT dev)
+
+# This makes the project importable from the build directory
+export(TARGETS ${PROJECT_NAME} FILE ${PROJECT_NAME}Config.cmake)
+
+# target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui)
+
+

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76" height="76" viewBox="0 0 76 76">
+    <defs>
+        <path id="2nk1u9ukxa" d="M40.5 9.443l20.98 12.114c1.548.893 2.5 2.543 2.5 4.33v24.226c0 1.787-.952 3.437-2.5 4.33L40.5 66.557c-1.547.893-3.453.893-5 0L14.52 54.443c-1.548-.893-2.5-2.543-2.5-4.33V25.887c0-1.787.952-3.437 2.5-4.33L35.5 9.443c1.547-.893 3.453-.893 5 0z"/>
+        <path id="i9jtbxh49c" d="M28.655 17.052L56.815 34.104 56.815 65.672 28.655 49.582z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-335 -188) translate(70 135) translate(265 53)">
+                    <mask id="a5rduean6b" fill="#fff">
+                        <use xlink:href="#2nk1u9ukxa"/>
+                    </mask>
+                    <use fill="#00C2D3" opacity=".103" xlink:href="#2nk1u9ukxa"/>
+                    <g mask="url(#a5rduean6b)" opacity=".2">
+                        <g transform="translate(9 5)">
+                            <path fill="#FFF" d="M0 17.052L28.655 0 56.815 17.052 28.655 34.104z" opacity=".8"/>
+                            <path fill="#FFF" d="M0.495 17.052L28.655 34.104 28.655 65.672 0.495 49.582z"/>
+                            <use fill="#FFF" opacity=".5" transform="matrix(-1 0 0 1 85.47 0)" xlink:href="#i9jtbxh49c"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

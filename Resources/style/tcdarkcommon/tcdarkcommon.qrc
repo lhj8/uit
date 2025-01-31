@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="checkbox-check">rc/image/checkbox-check.svg</file>
+        <file alias="checkbox-check-s">rc/image/checkbox-check-s.svg</file>
+        <file alias="checkbox-uncheck">rc/image/checkbox-uncheck.svg</file>
+        <file alias="drop-down">rc/image/ic-drop-down.svg</file>
+        <file alias="drop-up">rc/image/ic-drop-up.svg</file>
+        <file alias="drop-up-s">rc/image/ic-drop-up-s.svg</file>
+        <file alias="checkbox-cell-check">rc/image/ic-check-s.svg</file>
+        <file alias="radio-n">rc/image/radio-n.svg</file>
+        <file alias="radio-s">rc/image/radio-s.svg</file>
+        <file alias="spinbox-arrow-down">rc/image/input-down-n.svg</file>
+        <file alias="spinbox-arrow-down-s">rc/image/input-down-s.svg</file>
+        <file alias="spinbox-arrow-up">rc/image/input-up-n.svg</file>
+        <file alias="spinbox-arrow-up-s">rc/image/input-up-s.svg</file>
+        <file alias="ic-drop-close-g">rc/image/ic-drop-close-g.svg</file>
+        <file alias="branch-end">rc/image/stylesheet-branch-end.png</file>
+        <file alias="branch-more">rc/image/stylesheet-branch-more.png</file>
+        <file alias="vline">rc/image/stylesheet-vline.png</file>
+    </qresource>
+    <qresource prefix="/font">
+        <file alias="NotoSansKR-Bold.otf">rc/font/NotoSansKR-Bold.otf</file>
+        <file alias="NotoSansKR-Regular.otf">rc/font/NotoSansKR-Regular.otf</file>
+    </qresource>
+    <qresource prefix="/style">
+        <file>tcdarkcommon.qss</file>
+    </qresource>
+</RCC>

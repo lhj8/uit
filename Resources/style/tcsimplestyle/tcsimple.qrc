@@ -1,0 +1,19 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/img">
+    <file alias="bt-checkbox-check.svg">rc/image/bt-checkbox-check.svg</file>
+    <file alias="bt-checkbox-uncheck.svg">rc/image/bt-checkbox-uncheck.svg</file>
+    <file alias="bt-spinbox-down.svg">rc/image/bt-spinbox-down-n.svg</file>
+    <file alias="bt-spinbox-down-s.svg">rc/image/bt-spinbox-down-s.svg</file>
+    <file alias="bt-spinbox-up.svg">rc/image/bt-spinbox-up-n.svg</file>
+    <file alias="bt-spinbox-up-s.svg">rc/image/bt-spinbox-up-s.svg</file>
+    <file alias="bt-radio-n.svg">rc/image/bt-radio-n.svg</file>
+    <file alias="bt-radio-s.svg">rc/image/bt-radio-s.svg</file>
+    <file alias="ic-close.svg">rc/image/ic-close.svg</file>
+    <file alias="ic-dropdown-g.svg">rc/image/ic-drop-down-g.svg</file>
+    <file alias="ic-dropup.svg">rc/image/ic-drop-up.svg</file>
+    <file alias="ic-dropup-g.svg">rc/image/ic-drop-up-g.svg</file>
+</qresource>
+<qresource prefix="/style">
+    <file>tcsimple.qss</file>
+</qresource>
+</RCC>

@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M0 0h24v24H0V0zm19.933 21.192v-2.204a1 1 0 0 1 1-1h1.266a.981.981 0 0 0 .715-1.652l-5.685-6.059a1 1 0 0 0-1.458 0l-5.685 6.059a.981.981 0 0 0 .715 1.652h1.266a1 1 0 0 1 1 1v2.204a1 1 0 0 0 1 1h4.866a1 1 0 0 0 1-1z" id="yi0ro6kcua"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path d="M0 0h24v24H0z"/>
+        <g>
+            <mask id="54q7lylq4b" fill="#fff">
+                <use xlink:href="#yi0ro6kcua"/>
+            </mask>
+            <g mask="url(#54q7lylq4b)" stroke="#00C2D3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h6M7 9h4M7 3v6L3 20a.7.7 0 0 0 .5 1h11a.7.7 0 0 0 .5-1L11 9V3"/>
+                <path d="M7 9 3 20a.7.7 0 0 0 .5 1h11a.7.7 0 0 0 .5-1L11 9H7z" fill-opacity=".2" fill="#00C2D3"/>
+            </g>
+        </g>
+        <path stroke="#FFF" fill-opacity=".3" fill="#FFF" stroke-linecap="round" stroke-linejoin="round" d="M18.433 21v-4.204H21L16.5 12 12 16.796h2.567V21z"/>
+    </g>
+</svg>
