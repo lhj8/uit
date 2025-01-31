@@ -24,22 +24,36 @@ auto LoginWidget::OnSubmitClicked() -> void {
 
     const auto id = ui->inputID->text();
     const auto password = ui->inputPassword->text();
-    const auto storedID = userManager->GetUser(id)->GetUserID();
-    const auto storedPW = userManager->GetUser(id)->GetPassword();
-    const auto storedPV = userManager->GetUser(id)->GetPrivilege();
 
-    sessionManager->Login(userManager->GetUser(id));
+    const auto user = userManager->GetUser(id);
+
+    if (id.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, tr("User Login"), tr("Please fill all fields"));
+        return;
+    }
+    
+    if (user == nullptr) {  // user가 nullptr일 경우 처리
+        QMessageBox::warning(this, tr("User Login"), tr("User Not found"));
+        return; 
+    }
+
+    const auto storedID = user->GetUserID();
+    const auto storedPW = user->GetPassword();
+    const auto storedPV = user->GetPrivilege();
+
+    sessionManager->Login(user);
 
     QMap<uint8_t, QString> qm;
     qm.insert(0, "Supervisor");
-    qm.insert(1, "Enineer");
+    qm.insert(1, "Engineer");
     qm.insert(2, "Operator");
 
     if (id == storedID && password == storedPW) {
         QMessageBox::information(nullptr, "Authenticated", QString("Welcome %1!").arg(qm[storedPV]));
         this->accept();
-    }
-    else {
-        QMessageBox::warning(this, tr("User Login"), tr("Password Wrong or User Not found"));
+    } else {
+        QMessageBox::warning(this, tr("User Login"), tr("Wrong Password"));
+        return;
     }
 }
+
