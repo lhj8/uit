@@ -8,6 +8,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSystemTrayIcon>
+// #include <LoginWin.h>
 
 namespace Ui {
 	class StealthApp;
@@ -19,9 +20,6 @@ class StealthApp : public QMainWindow {
 public:
 	explicit StealthApp(QWidget *parent = nullptr);
 	~StealthApp() override;
-
-public slots:
-	void ShowWindow();
 
 private:
 	QSystemTrayIcon *trayIcon;

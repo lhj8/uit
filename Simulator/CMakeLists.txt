@@ -1,6 +1,7 @@
 project(Simulator VERSION 0.1 LANGUAGES CXX)
 
 include(GNUInstallDirs)
+include(GenerateExportHeader)
 
 #Headers
 set(PRIVATE_HEADERS
@@ -24,6 +25,10 @@ set(RESOURCE
     ${CMAKE_SOURCE_DIR}/Resources/style/qdarkstyle/style.qrc
 )
 
+# set(UserManagement_DIR "${CMAKE_SOURCE_DIR}/UserManagement")
+# set(UserManagement_INCLUDE_DIRS "${UserManagement_DIR}/inc")
+# set(UserManagement_LIBRARIES "${UserManagement_DIR}/../build/lib/Debug/UserManagement.lib")
+
 # To make the .exe
 add_executable(${PROJECT_NAME}
     ${PRIVATE_HEADERS}
@@ -42,6 +47,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/ui
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${UserManagement_INCLUDE_DIRS}
 )
 
 set_target_properties(${PROJECT_NAME}
@@ -56,6 +62,7 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         Qt5::Core
         Qt5::Widgets
+        ${UserManagement_LIBRARIES}
 )
 
 target_compile_features(${PROJECT_NAME} 

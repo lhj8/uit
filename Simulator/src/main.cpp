@@ -5,6 +5,7 @@
 #include <QSystemTrayIcon>
 #include <QTextStream>
 #include <iostream>
+
 #include "MainWindow.h"
 
 auto LoadDll(const QString& dllName, int& argc, char** argv) -> int {

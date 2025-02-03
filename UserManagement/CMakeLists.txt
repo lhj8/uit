@@ -1,11 +1,12 @@
 project(UserManagement VERSION 0.1 LANGUAGES CXX)
 
 include(GNUInstallDirs)
+include(GenerateExportHeader)  # GenerateExportHeader 모듈 포함
 
 #Headers
 set(PRIVATE_HEADERS
     inc/AddUserDialog.h
-    inc/loginwidget.h
+    inc/loginWin.h
     inc/MainWindow.h
     inc/User.h
     inc/UserDatabase.h
@@ -17,7 +18,7 @@ set(PRIVATE_HEADERS
 #Sources
 set(SOURCES
     src/AddUserDialog.cpp
-    src/loginwidget.cpp
+    src/loginWin.cpp
     src/MainWindow.cpp
     src/User.cpp
     src/UserDatabase.cpp
@@ -29,7 +30,7 @@ set(SOURCES
 #UI
 set(SOURCES_UI
     ui/AddUserDialog.ui
-    ui/LogInWidget.ui
+    ui/LoginWin.ui
     ui/MainWindow.ui
     ui/UserTreeWidget.ui
 )
@@ -40,7 +41,8 @@ set(RESOURCE
     ${CMAKE_SOURCE_DIR}/Resources/style/qdarkstyle/style.qrc
 )
 
-#To make the library
+# To make the library
+# To make .lib change to STATIC
 add_library(${PROJECT_NAME} SHARED
     ${PRIVATE_HEADERS}
     ${SOURCES_UI}
@@ -87,6 +89,11 @@ target_compile_options(${PROJECT_NAME}
 
 # For the shared library
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "build/UserManagement")
+
+generate_export_header(${PROJECT_NAME}
+    EXPORT_MACRO_NAME ${PROJECT_NAME}_API
+    EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Export.h
+)
 
 # 'make install' to the correct locations
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
