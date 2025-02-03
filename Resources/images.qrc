@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="common/">
-    <file>images/tomocube_logo_48x48.png</file>
+  <qresource prefix="/">
+    <file>Resources/images/logo.png</file>
   </qresource>
 </RCC>

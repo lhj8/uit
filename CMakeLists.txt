@@ -1,125 +1,37 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(UserManage VERSION 0.1 LANGUAGES CXX)
-include(GNUInstallDirs)
+cmake_minimum_required(VERSION 3.28)
+project(HTRUserManagement VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#Headers
-set(PRIVATE_HEADERS
-    inc/AddUserDialog.h
-    inc/loginwidget.h
-    inc/MainWindow.h
-    inc/User.h
-    inc/UserDatabase.h
-    inc/UserManager.h
-    inc/UserTreewidget.h
-    inc/SessionManager.h
-)
+if(MSVC)
+	# `stdext::checked_array_iterator` 디프리케이션 에러 발생. Qt, Protobuf(added via OpenCV)에 영향을 줌.
+	# TODO(TOMA-2737): 미래에는  C++20 hash/span 기반 함수를 사용한 버젼으로 업데이트. `stdext`너무 많이 바뀜.
+	add_definitions(-D_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
+	# -D_CRT_SECURE_NO_WARNINGS 도 나중에 윈도우 기반 오래된 라이브러리에서 필요할수 있음.
+	add_link_options(/debug)
+	# Debug Information Format
+	add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/Zi>)
+endif()
 
-#Sources
-set(SOURCES
-    src/AddUserDialog.cpp
-    src/loginwidget.cpp
-    src/MainWindow.cpp
-    src/User.cpp
-    src/UserDatabase.cpp
-    src/UserManager.cpp
-    src/UserTreewidget.cpp
-    src/SessionManager.cpp
-)
+# 디버그 빌드와 릴리스 빌드를 위한 출력 디렉토리 설정
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Debug)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/Release)
 
-#UI
-set(SOURCES_UI
-    ui/AddUserDialog.ui
-    ui/LogInWidget.ui
-    ui/MainWindow.ui
-    ui/UserTreeWidget.ui
-)
+# 라이브러리 및 아카이브 디렉토리 설정
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Debug)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/Release)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE	${CMAKE_BINARY_DIR}/lib/Release)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG	${CMAKE_BINARY_DIR}/lib/Debug)
 
-find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(RESOURCE
-    ${CMAKE_SOURCE_DIR}/Resources/style/qdarkstyle/style.qrc
-)
+find_package(Qt5 COMPONENTS Core Gui Widgets UiTools Charts REQUIRED)
 
-# To make the library
-add_library(${PROJECT_NAME} SHARED
-    ${PRIVATE_HEADERS}
-    ${SOURCES_UI}
-    ${SOURCES}
-    ${RESOURCE}
-)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER "AutoMoc Files")
 
-# To make the .exe
-# add_executable(${PROJECT_NAME}
-#     ${PRIVATE_HEADERS}
-#     ${SOURCES_UI}
-#     ${SOURCES}
-#     ${RESOURCE}
-#     main.cpp
-# )
-
-source_group("ui" FILES ${SOURCES_UI})
-
-target_include_directories(${PROJECT_NAME}
-    PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-        $<INSTALL_INTERFACE:inc>
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/Authority/ui
-        ${CMAKE_CURRENT_SOURCE_DIR}/Authority/src
-)
-
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-        AUTOMOC ON
-        AUTORCC ON
-        AUTOUIC ON
-        AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui
-)
-
-target_link_libraries(${PROJECT_NAME}
-    PUBLIC
-        Qt5::Core
-        Qt5::Widgets
-)
-
-target_compile_features(${PROJECT_NAME} 
-    PUBLIC 
-        cxx_std_17
-)
-
-target_compile_options(${PROJECT_NAME}
-    PUBLIC
-        $<$<COMPILE_LANGUAGE:C>:/wd4251>
-        $<$<COMPILE_LANGUAGE:CXX>:/wd4251>
-)
-
-# For the shared library
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "build/libs")
-
-# For the .exe
-# set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "build/Debug")
-
-
-# 'make install' to the correct locations
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
-    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT dev
-    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT dev
-    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT application_userManage)
-install(DIRECTORY inc/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT dev)
-
-# This makes the project importable from the install directory
-# Put config file in per-project dir (name MUST match), can also
-# just go into 'cmake'.
-install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME}/cmake COMPONENT dev)
-
-# This makes the project importable from the build directory
-export(TARGETS ${PROJECT_NAME} FILE ${PROJECT_NAME}Config.cmake)
-
-# target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui)
-
-
+add_subdirectory(UserManagement)
+add_subdirectory(Simulator)
