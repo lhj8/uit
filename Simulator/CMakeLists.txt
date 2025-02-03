@@ -25,9 +25,9 @@ set(RESOURCE
     ${CMAKE_SOURCE_DIR}/Resources/style/qdarkstyle/style.qrc
 )
 
-# set(UserManagement_DIR "${CMAKE_SOURCE_DIR}/UserManagement")
-# set(UserManagement_INCLUDE_DIRS "${UserManagement_DIR}/inc")
-# set(UserManagement_LIBRARIES "${UserManagement_DIR}/../build/lib/Debug/UserManagement.lib")
+set(UserManagement_DIR "${CMAKE_SOURCE_DIR}/UserManagement")
+set(UserManagement_INCLUDE_DIRS "${UserManagement_DIR}/inc")
+set(UserManagement_LIBRARIES "${CMAKE_SOURCE_DIR}/build/lib/Debug/UserManagement.lib")
 
 # To make the .exe
 add_executable(${PROJECT_NAME}

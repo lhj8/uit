@@ -39,9 +39,10 @@ StealthApp::StealthApp(QWidget *parent) : QMainWindow(parent), d{ std::make_uniq
 	trayIcon->setContextMenu(trayMenu);
 
 	// 'Manage User' Action
-	connect(manageAction, &QAction::triggered, this, &QApplication::quit);
-
-
+	connect(manageAction, &QAction::triggered, this, [this]() {
+		LoginWin *loginWin = new LoginWin(this);
+		loginWin->show();
+	});
 }
 
 StealthApp::~StealthApp() {

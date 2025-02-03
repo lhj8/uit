@@ -43,7 +43,7 @@ set(RESOURCE
 
 # To make the library
 # To make .lib change to STATIC
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} STATIC
     ${PRIVATE_HEADERS}
     ${SOURCES_UI}
     ${SOURCES}

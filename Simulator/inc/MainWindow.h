@@ -8,7 +8,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSystemTrayIcon>
-// #include <LoginWin.h>
+#include <LoginWin.h>
 
 namespace Ui {
 	class StealthApp;
